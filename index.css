@@ -1,0 +1,72 @@
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+.active {
+  color: #ff784f;
+}
+
+main {
+  border: 1px solid black;
+  height: 600px;
+  width: 300px;
+}
+
+header h3 {
+  margin: 5px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.transparent-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.search input,
+.sort-by select {
+  margin: 0 auto;
+  display: block;
+}
+
+.sort-by {
+  margin-top: 5px;
+}
+
+.contacts {
+  overflow-y: auto; /* scroll */
+  height: 75%;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.circle {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  display: inline-block;
+  border: 1px solid green;
+}
