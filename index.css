@@ -8,6 +8,9 @@ html {
   justify-content: center;
   height: 100vh;
 }
+select {
+  cursor: pointer;
+}
 
 button {
   cursor: pointer;

@@ -1,51 +1,102 @@
-const contacts = [
+const contactsInitial = [
   {
     name: "John Doe",
-    status: "Last seen just now",
+    lastSeenAt: "2021-06-09T19:07:42",
   },
   {
     name: "Alice Johnson",
-    status: "Online",
+    lastSeenAt: null,
   },
   {
     name: "Alice Alison",
-    status: "Online",
+    lastSeenAt: null,
   },
   {
     name: "Alice Bobson",
-    status: "Online",
+    lastSeenAt: null,
   },
   {
     name: "Bob Martin",
-    status: "Last seen just now",
+    lastSeenAt: "2021-07-09T19:07:42",
   },
   {
     name: "Denis Albus",
-    status: "Online",
+    lastSeenAt: null,
   },
   {
     name: "Gary Vee",
-    status: "Last seen just now",
+    lastSeenAt: "2021-07-11T05:57:42",
+  },
+  {
+    name: "Bob Marley",
+    lastSeenAt: "2021-07-11T12:57:42",
   },
   {
     name: "Denis Kruger",
-    status: "Last seen just now",
+    lastSeenAt: "2021-07-12T12:30:45",
   },
   {
     name: "Linus Torwalds",
-    status: "Last seen 22 minutes ago",
+    lastSeenAt: "2021-07-12T12:08:45",
+  },
+  {
+    name: "Bella Underground",
+    lastSeenAt: "2021-07-12T10:08:45",
   },
   {
     name: "Will Smith",
-    status: "Last seen 7 hours ago",
+    lastSeenAt: null,
   },
   {
     name: "Arnold Schwarzenegger",
-    status: "Last seen 10 minutes ago",
+    lastSeenAt: "2021-07-05T10:20:42",
   },
 ];
 
+let contactsCopy = contactsInitial.slice();
+const contactsList = document.querySelector(".contacts");
+
+const padZero = (number) => (number < 10 ? "0" + number : number);
+
+const getText = (singular, plural, number) =>
+  number === 1 ? singular : plural;
+
+function dateFromNow(dateString) {
+  const dateNow = new Date();
+  const date = new Date(dateString);
+
+  const diffMinutes = Math.floor((dateNow - date) / 1000 / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+
+  if (diffMinutes < 5) {
+    return "just now";
+  }
+
+  if (diffHours < 1) {
+    return `${diffMinutes} ${getText("minute", "minutes", diffMinutes)} ago`;
+  }
+
+  if (diffHours < dateNow.getHours()) {
+    return `${diffHours} ${getText("hour", "hours", diffHours)} ago`;
+  }
+
+  if (diffHours < 24 + dateNow.getHours()) {
+    return `yesterday at ${padZero(date.getHours())}:${padZero(
+      date.getMinutes()
+    )}`;
+  }
+
+  const day = padZero(date.getDate());
+  const month = padZero(date.getMonth() + 1);
+  const year = date.getFullYear();
+  return [day, month, year].join("-");
+}
+
 function renderContact(contact) {
+  const status =
+    contact.lastSeenAt === null
+      ? "Online"
+      : `Last seen ${dateFromNow(contact.lastSeenAt)}`;
   return `
     <li class="contact">
       <span class="circle"></span>
@@ -53,17 +104,22 @@ function renderContact(contact) {
         <b>${contact.name}</b>
         <br>
         <small ${
-          contact.status === "Online"
-            ? 'style="color: var(--color-active)"'
-            : ""
-        }>${contact.status}</small>
+          status === "Online" ? 'style="color: var(--color-active)"' : ""
+        }>${status}</small>
       </div>
     </li>
   `;
 }
 
+function renderContacts(contacts) {
+  contactsList.innerHTML = "";
+  for (let contact of contacts) {
+    contactsList.innerHTML += renderContact(contact);
+  }
+}
+
 // TODO(*): sort exactly like in telegram.
-function sort(contacts) {
+function sortByName(contacts) {
   function compare(contact1, contact2) {
     const name1 = contact1.name.toLowerCase();
     const name2 = contact2.name.toLowerCase();
@@ -92,26 +148,40 @@ function sort(contacts) {
   return contacts.sort(compare);
 }
 
+function sortByStatus(contacts) {
+  function compare(contact1, contact2) {
+    const isOnline1 = contact1.lastSeenAt === null;
+    const isOnline2 = contact2.lastSeenAt === null;
+
+    if (isOnline1 && !isOnline2) {
+      return -1;
+    }
+
+    if (isOnline2 && !isOnline1) {
+      return 1;
+    }
+
+    return new Date(contact2.lastSeenAt) - new Date(contact1.lastSeenAt);
+  }
+  return contacts.sort(compare);
+}
+
+// todo: implement search/filter.
 function render() {
-  const contactsList = document.querySelector(".contacts");
-  sort(contacts);
+  sortByName(contactsCopy);
+  renderContacts(contactsCopy);
 
   const sortBy = document.querySelector("#sort-by");
+
   sortBy.addEventListener("change", () => {
     if (sortBy.value === "status") {
-      // TODO:
-      // sort by status...
-      console.log("updating ui"); // update ui
+      sortByStatus(contactsCopy);
+      renderContacts(contactsCopy);
     } else if (sortBy.value === "name") {
-      // TODO:
-      sort(contacts);
-      console.log("updating ui");
+      sortByName(contactsCopy);
+      renderContacts(contactsCopy);
     }
   });
-
-  for (let contact of contacts) {
-    contactsList.innerHTML += renderContact(contact);
-  }
 
   const buttons = document.querySelectorAll(".transparent-btn");
 
