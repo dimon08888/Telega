@@ -6,7 +6,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 700px;
 }
 select {
   cursor: pointer;
@@ -51,6 +51,12 @@ header {
 .sort-by select {
   margin: 0 auto;
   display: block;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.search input:focus {
+  text-align: left;
 }
 
 .sort-by {

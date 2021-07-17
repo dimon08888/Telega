@@ -1,59 +1,6 @@
-const contactsInitial = [
-  {
-    name: "John Doe",
-    lastSeenAt: "2021-06-09T19:07:42",
-  },
-  {
-    name: "Alice Johnson",
-    lastSeenAt: null,
-  },
-  {
-    name: "Alice Alison",
-    lastSeenAt: null,
-  },
-  {
-    name: "Alice Bobson",
-    lastSeenAt: null,
-  },
-  {
-    name: "Bob Martin",
-    lastSeenAt: "2021-07-09T19:07:42",
-  },
-  {
-    name: "Denis Albus",
-    lastSeenAt: null,
-  },
-  {
-    name: "Gary Vee",
-    lastSeenAt: "2021-07-11T05:57:42",
-  },
-  {
-    name: "Bob Marley",
-    lastSeenAt: "2021-07-11T12:57:42",
-  },
-  {
-    name: "Denis Kruger",
-    lastSeenAt: "2021-07-12T12:30:45",
-  },
-  {
-    name: "Linus Torwalds",
-    lastSeenAt: "2021-07-12T12:08:45",
-  },
-  {
-    name: "Bella Underground",
-    lastSeenAt: "2021-07-12T10:08:45",
-  },
-  {
-    name: "Will Smith",
-    lastSeenAt: null,
-  },
-  {
-    name: "Arnold Schwarzenegger",
-    lastSeenAt: "2021-07-05T10:20:42",
-  },
-];
+import db from "./db.js";
 
-let contactsCopy = contactsInitial.slice();
+let contactsCopy = db.contacts.slice();
 const contactsList = document.querySelector(".contacts");
 
 const padZero = (number) => (number < 10 ? "0" + number : number);
@@ -118,7 +65,6 @@ function renderContacts(contacts) {
   }
 }
 
-// TODO(*): sort exactly like in telegram.
 function sortByName(contacts) {
   function compare(contact1, contact2) {
     const name1 = contact1.name.toLowerCase();
@@ -166,22 +112,42 @@ function sortByStatus(contacts) {
   return contacts.sort(compare);
 }
 
-// todo: implement search/filter.
+// db.contacts
+// contactsCopy
+// sort -> contactsCopy
+// filter -> contactsCopy -> array
+// sort -> contactsCopy
+
+// array
+// sorting.
+// fintering. ->?
+
+const inputText = document.querySelector("#searchRandom");
+
+// todo: filter doesn't work with sort and vice verca.
+inputText.addEventListener("input", () => {
+  const name = inputText.value.toLowerCase();
+  const filtered = db.contacts.filter((el) =>
+    el.name.toLowerCase().includes(name)
+  );
+  renderContacts(filtered);
+});
+
+const sortBy = document.querySelector("#sort-by");
+
+sortBy.addEventListener("change", () => {
+  if (sortBy.value === "status") {
+    sortByStatus(contactsCopy);
+    renderContacts(contactsCopy);
+  } else if (sortBy.value === "name") {
+    sortByName(contactsCopy);
+    renderContacts(contactsCopy);
+  }
+});
+
 function render() {
   sortByName(contactsCopy);
   renderContacts(contactsCopy);
-
-  const sortBy = document.querySelector("#sort-by");
-
-  sortBy.addEventListener("change", () => {
-    if (sortBy.value === "status") {
-      sortByStatus(contactsCopy);
-      renderContacts(contactsCopy);
-    } else if (sortBy.value === "name") {
-      sortByName(contactsCopy);
-      renderContacts(contactsCopy);
-    }
-  });
 
   const buttons = document.querySelectorAll(".transparent-btn");
 
@@ -196,3 +162,50 @@ function render() {
 }
 
 render();
+
+// Linear Search.
+// function find(array, target) {
+//   // for (let i = 0; i < array.length; i++) {
+//   //   if (array[i] === target) {
+//   //     return true;
+//   //   }
+//   // }
+
+//   // for (const element of array) {
+//   //   if (element === target) {
+//   //     return true;
+//   //   }
+//   // }
+
+//   // return false;
+//   return array.some((element) => element === target);
+//   // return array.includes(target);
+// }
+
+//       i
+//       6
+// MarginBomoBob
+
+// j
+// 0
+// Bob
+
+// console.log(substr("BobMargin", "Bob"));
+// console.log(substr("MartinBob", "Bob"));
+// console.log(substr("Mar Bob tin", "Bob"));
+
+// console.log(find(["bob", "john", "alice", "elena"], "bob"));
+// console.log(find(["alice", "bob", "john", "elena"], "bob"));
+// console.log(find(["alice", "john", "bob", "elena"], "bob"));
+// console.log(find(["alice", "john", "elena", "bob"], "bob"));
+// console.log(find(["alice", "john", "elena", "denis"], "bob"));
+// console.log(
+//   db.contacts.some(
+//     (contact) =>
+//       JSON.stringify(contact) ===
+//       JSON.stringify({
+//         name: "Alice Bobson",
+//         lastSeenAt: null,
+//       })
+//   )
+// );

@@ -9,7 +9,7 @@
     integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=='
     crossOrigin='anonymous' />
   <link rel="stylesheet" href="index.css">
-  <script src="index.js" defer></script>
+  <script src="index.js" defer type='module'></script>
 </head>
 
 <body>
@@ -23,17 +23,16 @@
         </button>
       </header>
       <div class="search">
-        <input type="text" placeholder="Search">
+        <input id="searchRandom" type="text" placeholder="Search...">
       </div>
       <div class="sort-by">
-        <!-- TODO: sort by name, and-->
         <select name="" id="sort-by">
-          <!-- <option value="" hidden>Sort by</option> -->
           <option value="name">Sorted by Name</option>
           <option value="status">Sorted by Status</option>
         </select>
       </div>
       <ul class="contacts">
+
       </ul>
       <nav>
         <button class="transparent-btn active"><i class="fa fa-address-book"
