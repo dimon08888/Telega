@@ -2,16 +2,56 @@ html {
   --color-active: #ff784f;
 }
 
-#root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 700px;
-}
-select {
-  cursor: pointer;
+html,
+body {
+  height: 100%;
 }
 
+body {
+  display: grid;
+  place-items: center;
+}
+
+#root {
+  max-width: fit-content;
+  margin: auto;
+  background: linear-gradient(#dce9e3, #fff, #d4e9e9);
+  border: 2px solid black;
+  border-radius: 15px;
+  height: 600px;
+  min-width: 300px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  height: 90%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 5px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover {
+  color: var(--color-active);
+  transition: all 0.5s;
+}
+
+select,
 button {
   cursor: pointer;
 }
@@ -21,25 +61,12 @@ button:hover {
   transition: all 0.5s;
 }
 
-.active {
+.active * {
   color: var(--color-active);
-}
-
-main {
-  border: 2px solid black;
-  border-radius: 15px;
-  height: 600px;
-  width: 300px;
-  background: linear-gradient(#dce9e3, #fff, #d4e9e9);
 }
 
 header h3 {
   margin: 5px;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
 }
 
 .transparent-btn {
@@ -65,16 +92,11 @@ header {
 
 .contacts {
   overflow-y: auto; /* scroll */
-  height: 75%;
+  height: 80%;
   list-style-type: none;
   display: flex;
   flex-direction: column;
   gap: 5px;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
 }
 
 .contact {

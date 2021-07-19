@@ -9,43 +9,44 @@
     integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=='
     crossOrigin='anonymous' />
   <link rel="stylesheet" href="index.css">
+  <script>
+    const $ = (selector, element = document) => element.querySelector(selector);
+    const $$ = (selector) => document.querySelectorAll(selector);
+  </script>
   <script src="index.js" defer type='module'></script>
 </head>
 
 <body>
   <div id="root">
     <main>
-      <header>
-        <span style="flex: 0 0 10%"></span>
-        <h3>Contacts</h3>
-        <button class="transparent-btn" style="flex: 0 0 10%">
-          <i class="fa fa-plus" aria-hidden="true"></i>
+    </main>
+    <nav>
+      <a href="/">
+        <button class="transparent-btn">
+          <i class="fa fa-address-book" aria-hidden="true"></i>
+          <br />Contacts
         </button>
-      </header>
-      <div class="search">
-        <input id="searchRandom" type="text" placeholder="Search...">
-      </div>
-      <div class="sort-by">
-        <select name="" id="sort-by">
-          <option value="name">Sorted by Name</option>
-          <option value="status">Sorted by Status</option>
-        </select>
-      </div>
-      <ul class="contacts">
-
-      </ul>
-      <nav>
-        <button class="transparent-btn active"><i class="fa fa-address-book"
-            aria-hidden="true"></i><br />Contacts</button>
-        <button class="transparent-btn"><i class="fa fa-phone" aria-hidden="true"></i><br />Calls</button>
+      </a>
+      <a href="/calls">
+        <button class="transparent-btn">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <br />Calls
+        </button>
+      </a>
+      <a href="/chats">
         <button class="transparent-btn">
           <i class="fa fa-comments" aria-hidden="true"></i>
           <br />
           Chats
         </button>
-        <button class="transparent-btn"><i class="fa fa-cog" aria-hidden="true"></i><br />Settings</button>
-      </nav>
-    </main>
+      </a>
+      <a href="/settings">
+        <button class="transparent-btn">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+          <br />Settings
+        </button>
+      </a>
+    </nav>
   </div>
 </body>
 
