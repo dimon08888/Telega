@@ -1,8 +1,10 @@
 export default {
+  // TODO: add phone property to each user.
   contacts: [
     {
       name: "John Doe",
       lastSeenAt: "2021-06-09T19:07:42",
+      phone: "8-925-898-00-23",
     },
     {
       name: "Alice Johnson",

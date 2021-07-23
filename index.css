@@ -112,3 +112,61 @@ header h3 {
   display: inline-block;
   border: 1px solid green;
 }
+
+.form {
+  margin: auto;
+  margin-top: 100px;
+  width: 150px;
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px #ccc;
+}
+
+.form__title {
+  text-align: center;
+  margin: 0 0 32px 0;
+}
+
+.form__button {
+  margin-left: 33px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #0071f0;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.form__group {
+  margin-bottom: 32px;
+}
+
+.form__input {
+  width: 100%;
+  padding: 0px 0px 10px 0px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+  outline: none;
+  transition: border-bottom 0.5s;
+}
+
+.form__input:invalid {
+  border-color: red;
+}
+
+.form__input:valid {
+  border-color: green;
+}
+
+.form__button:focus,
+.form__button:hover {
+  background-color: rgba(0, 113, 240, 0.7);
+}
+
+.form__input:focus {
+  border-bottom: 1px solid #000;
+}
