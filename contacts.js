@@ -1,7 +1,5 @@
 import db from "./db.js";
 
-let contactsCopy = db.contacts.slice();
-
 const padZero = (number) => String(number).padStart(2, "0");
 
 const getText = (singular, plural, number) =>
@@ -93,13 +91,15 @@ function renderContact(contact) {
   return `
     <li class="contact">
       <span class="circle"></span>
-      <div>
+      <a href= "/contact-detail" data-state='${JSON.stringify({
+        id: contact.id,
+      })}'>
         <b>${contact.name}</b>
         <br>
         <small ${
           status === "Online" ? 'style="color: var(--color-active)"' : ""
         }>${status}</small>
-      </div>
+      </a>
     </li>
   `;
 }
@@ -112,7 +112,16 @@ function renderContacts(contacts) {
   }
 }
 
+// [1, 2, 3, 4,]
+// []
+
+// [{ name: 'dasn' }, {}, {}, {}]
+
+// [{ name: 'dasn' }. {}. {}. {}]
+
 export default function render() {
+  const contactsCopy = [...db.contacts]; // db.contacts.slice() -> makes shallow copy.
+
   $("main").innerHTML = `
      <header>
         <span style="flex: 0 0 10%"></span>

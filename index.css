@@ -1,6 +1,9 @@
 html {
   --color-active: #ff784f;
 }
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -115,8 +118,8 @@ header h3 {
 
 .form {
   margin: auto;
-  margin-top: 100px;
-  width: 150px;
+  margin-top: 110px;
+  width: 220px;
   padding: 32px;
   border-radius: 10px;
   box-shadow: 0 4px 16px #ccc;
@@ -141,7 +144,19 @@ header h3 {
 }
 
 .form__group {
+  position: relative;
   margin-bottom: 32px;
+}
+
+.form__control {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  visibility: hidden;
+}
+
+.fa-check-circle:before {
+  color: inherit;
 }
 
 .form__input {
@@ -153,6 +168,10 @@ header h3 {
   outline: none;
   transition: border-bottom 0.5s;
 }
+
+/* .form__input.error .form__input::after {
+  content: "X";
+} */
 
 .form__input:invalid {
   border-color: red;
