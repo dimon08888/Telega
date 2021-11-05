@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telegram</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script>
+      const $ = (selector, element = document) => element.querySelector(selector);
+      const $$ = (selector) => document.querySelectorAll(selector);
+    </script>
+    <script src="./dist/index.js" defer type="module"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telegram</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'
-    integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=='
-    crossOrigin='anonymous' />
-  <link rel="stylesheet" href="index.css">
-  <script>
-    const $ = (selector, element = document) => element.querySelector(selector);
-    const $$ = (selector) => document.querySelectorAll(selector);
-  </script>
-  <script src="index.js" defer type='module'></script>
-</head>
-
-<body>
-  <div id="root">
-    <main>
-    </main>
-    <nav>
-      <a href="/">
-        <button class="transparent-btn">
-          <i class="fa fa-address-book" aria-hidden="true"></i>
-          <br />Contacts
-        </button>
-      </a>
-      <a href="/calls">
-        <button class="transparent-btn">
-          <i class="fa fa-phone" aria-hidden="true"></i>
-          <br />Calls
-        </button>
-      </a>
-      <a href="/chats">
-        <button class="transparent-btn">
-          <i class="fa fa-comments" aria-hidden="true"></i>
-          <br />
-          Chats
-        </button>
-      </a>
-      <a href="/settings">
-        <button class="transparent-btn">
-          <i class="fa fa-cog" aria-hidden="true"></i>
-          <br />Settings
-        </button>
-      </a>
-    </nav>
-  </div>
-</body>
-
+  <body>
+    <div id="root">
+      <main></main>
+      <nav>
+        <a href="/">
+          <button class="transparent-btn">
+            <i class="fa fa-address-book" aria-hidden="true"></i>
+            <br />Contacts
+          </button>
+        </a>
+        <a href="/calls">
+          <button class="transparent-btn">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <br />Calls
+          </button>
+        </a>
+        <a href="/chats">
+          <button class="transparent-btn">
+            <i class="fa fa-comments" aria-hidden="true"></i>
+            <br />
+            Chats
+          </button>
+        </a>
+        <a href="/settings">
+          <button class="transparent-btn">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <br />Settings
+          </button>
+        </a>
+      </nav>
+    </div>
+  </body>
 </html>

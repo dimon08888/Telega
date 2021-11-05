@@ -1,14 +1,17 @@
-const routes = {
-  "/": () => import("./contacts.js"),
-  "/calls": () => import("./calls.js"),
-  "/chats": () => import("./chats.js"),
-  "/settings": () => import("./settings.js"),
-  "/add-contact": () => import("./add-contact.js"),
-  "/contact-detail": () => import("./contact-detail.js"),
+type State = any | undefined;
+export type RenderFunc = (redirect_: typeof redirect, state: State) => void;
+
+const routes: Record<string, () => Promise<{ default: RenderFunc }>> = {
+  '/': () => import('./contacts.js'),
+  '/calls': () => import('./calls.js'),
+  '/chats': () => import('./chats.js'),
+  '/settings': () => import('./settings.js'),
+  '/add-contact': () => import('./add-contact.js'),
+  '/contact-detail': () => import('./contact-detail.js'),
 };
 
-document.addEventListener("click", (e) => {
-  const link = e.target.closest("a");
+document.addEventListener('click', (e) => {
+  const link = (e.target as HTMLElement).closest('a') as HTMLAnchorElement | null;
   if (link !== null) {
     e.preventDefault(); // prevent page reload.
     redirect(link.pathname, link.dataset.state);
@@ -19,12 +22,12 @@ window.onpopstate = () => {
   renderPage(window.location.pathname);
 };
 
-function redirect(pathname, state = undefined) {
-  window.history.pushState({}, "", pathname);
+function redirect(pathname: string, state: State = undefined) {
+  window.history.pushState({}, '', pathname);
   renderPage(pathname, state);
 }
 
-function renderPage(pathname, state = undefined) {
+function renderPage(pathname: string, state: State = undefined) {
   const pageFunc = routes[pathname];
 
   if (!pageFunc) {
@@ -33,18 +36,18 @@ function renderPage(pathname, state = undefined) {
 
   const promise = pageFunc();
   promise.then(({ default: renderFunc }) => {
-    if (typeof renderFunc === "undefined") {
-      throw new Error("Page must export default a render function.");
+    if (typeof renderFunc === 'undefined') {
+      throw new Error('Page must export default a render function.');
     }
     renderFunc(redirect, state ? JSON.parse(state) : undefined);
   });
 
-  const links = $$("a");
+  const links = $$('a') as NodeListOf<HTMLAnchorElement>;
   links.forEach((link) => {
     if (link.pathname === pathname) {
-      link.classList.add("active");
+      link.classList.add('active');
     } else {
-      link.classList.remove("active");
+      link.classList.remove('active');
     }
   });
 }
