@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import db from './db';
 
 const app = express();
 
@@ -11,7 +12,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/contacts', (req, res) => {
-  res.sendFile(path.join(__dirname, 'db.json'));
+  db.query('SELECT id, name, phone, last_seen_at FROM contacts').then((result) =>
+    res.send(result.rows),
+  );
 });
 
 app.listen(5000, () => {
