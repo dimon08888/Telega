@@ -1,4 +1,4 @@
-import db from './db.js';
+// import db from './db.js';
 import { RenderFunc } from './index';
 const renderAddContact: RenderFunc = (redirect) => {
   // TODO: do not use html validation, because it is not customizable.
@@ -78,12 +78,12 @@ const renderAddContact: RenderFunc = (redirect) => {
     }
 
     if (ok) {
-      db.contacts.push({
-        id: db.contacts[db.contacts.length - 1].id + 1,
-        name: name.value,
-        phone: phone.value,
-        lastSeenAt: null,
-      }); // add contact
+      // INSERT DATA IN DATABASE. // db.contacts.push({
+      //   id: db.contacts[db.contacts.length - 1].id + 1,
+      //   name: name.value,
+      //   phone: phone.value,
+      //   lastSeenAt: null,
+      // }); // add contact
       redirect('/');
     }
   });

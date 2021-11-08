@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsc --watch",
     "start": "live-server --port=3000 --entry-file=index.html"
   },
   "keywords": [],

@@ -1,4 +1,3 @@
-import db from './db.js';
 import { Contact } from './types';
 
 const padZero = (n: number) => String(n).padStart(2, '0');
@@ -125,11 +124,12 @@ function renderContacts(contacts: Contact[]) {
 
 // [{ name: 'dasn' }. {}. {}. {}]
 
-export default function render() {
-  const contactsCopy = [...db.contacts]; // db.contacts.slice() -> makes shallow copy.
+export default async function render() {
+  const res = await fetch('/contacts');
+  const contactsCopy: Contact[] = await res.json();
 
-  ($('main') as HTMLElement).innerHTML = `
-     <header>
+  ($('main') as any).innerHTML = `
+   <header>
         <span style="flex: 0 0 10%"></span>
         <h3>Contacts</h3>
         <button class="transparent-btn" style="flex: 0 0 10%">

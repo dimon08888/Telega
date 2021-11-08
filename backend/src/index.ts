@@ -4,11 +4,13 @@ import db from './db';
 
 const app = express();
 
+app.use('/static', express.static('public'));
+
 app.get('/', (req, res) => {
   // res.send('Hello from Backend!');
   // res.send('<h1>Hello from Backend!</h1>');
   // res.send({ hello: 'world' });
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 app.get('/contacts', (req, res) => {

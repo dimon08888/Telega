@@ -1,4 +1,3 @@
-import db from './db.js';
 import { RenderFunc } from './index';
 
 const renderContactDetail: RenderFunc = (redirect, state = undefined) => {
